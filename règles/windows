@@ -1,0 +1,20 @@
+titre : Multiple login authentification failure from same IP destination
+description : plusieurs échecs d’authentification avec un compte utilisateur vers une même destination durant une fenêtre de temps définie	
+
+    catégorie : WinEventLog - XMLWinEventLog
+détection :
+    sélection :
+        action : failure
+    délai : 1mn
+    condition :
+        -Le compte ne doit pas être un compte d’administration
+        -sélection | count (dst_ip) par src_ip> 9
+champs :
+    - src_ip
+    - dst_ip
+    - dst_port
+faux - positifs :
+    - Systèmes d'inventaire
+    - analyses de vulnérabilité
+    - Activité de test de pénétration
+niveau : critique
